@@ -7,7 +7,7 @@ const passport = require('passport');
 const connectDB = require('./config/db');
 const session = require('express-session');
 const mongoose = require('mongoose');
-const MongoStore = require('connect-mongo')(session)
+const MongoStore = require('connect-mongo')(session),ejs = require('ejs');
 // load db
 connectDB()
 // load passport
@@ -30,6 +30,7 @@ app.use(express.urlencoded({
 }))
 app.use(express.json())
 // load view handlebars
+app.set('view engine', 'ejs' )
 app.engine('.hbs', exphbs({ 
     defaultLayout: 'main',
     extname: '.hbs'

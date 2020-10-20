@@ -6,7 +6,7 @@ router.get('/login', (req, res) => {
 })
 
 // dashboard page
-router.get('/', (req, res) => {
+router.get('/',  (req, res) => {
     res.render('dashboard')
 })
 
@@ -17,7 +17,18 @@ router.get('/about', (req, res) => {
 
 // about page
 router.get('/profile', (req, res) => {
-    res.render('profile', {user:req.user})
+    // render view from user data
+   const user = {
+       displayName:req.user.displayName,
+       firstName:req.user.firstName,
+       lastName:req.user.lastName,
+       image:req.user.image
+   }
+   if(!user){
+       res.render('profile')
+   } else {
+       res.render('profile', {user})
+   }
 })
 
 module.exports = router;
