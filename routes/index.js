@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../model/user');
+const {ensureAuth} = require('../config/auth');
 // login page
 router.get('/login', (req, res) => {
     res.render('login', {layout:'login'})
@@ -16,7 +17,7 @@ router.get('/about', (req, res) => {
 })
 
 // about page
-router.get('/profile', (req, res) => {
+router.get('/profile', ensureAuth,(req, res) => {
     // render view from user data
    const user = {
        displayName:req.user.displayName,
