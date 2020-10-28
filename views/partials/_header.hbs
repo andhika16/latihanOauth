@@ -16,14 +16,29 @@
             {{#if user}}
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/"><img src="{{user.image}}" alt="" width="30px"> <span>Hai</span>
+                    <a class="nav-link" href="/profile"><img src="{{user.image}}" alt="" width="30px"> <span>Hai</span>
                         {{user.firstName}}</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li>
+                    <a class="btn btn-primary btn-md" href="/auth/logout"><i class="fas fa-sign-in-alt"></i>
+                        Logout</a>
+                </li>
+            </ul>
+
+            {{else}}
+            <ul class="navbar-nav ml-auto">
+                <li>
+                    <a class="btn btn-primary btn-md" href="/login"><i class="fas fa-sign-in-alt"></i>
+                        Login</a>
                 </li>
             </ul>
             {{/if}}
 
+
         </div>
     </div>
-    <a class="btn btn-primary btn-md" href="/login"><i class="fas fa-sign-in-alt"></i>
-        Login</a>
+
+
 </nav>
