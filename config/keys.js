@@ -8,5 +8,10 @@ module.exports = {
     }
 }
 
+
+// appiD = clientId = 805641363582124
+// appSecret = clientSecret = f3c89aef0bed0ae7d5d4f68f17a50e49
+// redirectURI = http://localhost:3000/
+// encodeURI = http%3A%2F%2Flocalhost%3A3000%2F
  
  

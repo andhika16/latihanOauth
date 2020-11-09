@@ -18,19 +18,20 @@ router.get('/about', (req, res) => {
 })
 
 // about page
-router.get('/profile', ensureAuth, (req, res) => {
+router.get('/profile', (req, res) => {
     // render view from user data
-    const user = {
-        displayName:req.user.displayName,
-        firstName:req.user.firstName,
-        lastName:req.user.lastName,
-        image:req.user.image
-    }
-   if(!user){
-       res.render('profile')
-   } else {
-       res.render('profile', {user})
-   }
+//     const user = {
+//         displayName:req.user.displayName,
+//         firstName:req.user.firstName,
+//         lastName:req.user.lastName,
+//         image:req.user.image
+//     }
+//    if(!user){
+//        res.render('profile')
+//    } else {
+//        res.render('profile', {user})
+//    }
+console.log(req.user);
 })
 
 module.exports = router;

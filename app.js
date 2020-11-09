@@ -7,11 +7,18 @@ const passport = require('passport');
 const connectDB = require('./config/db');
 const session = require('express-session');
 const mongoose = require('mongoose');
-const MongoStore = require('connect-mongo')(session),ejs = require('ejs');
+const MongoStore = require('connect-mongo')(session);
+const dotenv = require('dotenv');
+// load config
+dotenv.config({
+    path:'./config/config.env'
+})
 // load db
 connectDB()
 // load passport
 require('./config/passport')(passport);
+// load passport-facebook
+require('./config/passport-facebook')(passport);
 // session
 app.use(session({
     secret: 'secret',
@@ -43,6 +50,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // route
 app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/google-auth'))
+app.use('/auth', require('./routes/facebook-auth'))
 
 // port
 app.listen(PORT, (req, res) => {
