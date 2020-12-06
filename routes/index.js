@@ -17,6 +17,12 @@ router.get('/about', (req, res) => {
     res.render('about')
 })
 
+// github page
+router.get('/github_user', (req, res) => {
+    res.render('github_user')
+})
+
+
 // about page
 router.get('/profile', (req, res) => {
     // render view from user data
@@ -26,12 +32,12 @@ router.get('/profile', (req, res) => {
 //         lastName:req.user.lastName,
 //         image:req.user.image
 //     }
-//    if(!user){
-//        res.render('profile')
+//    if(!user)
+       res.render('profile')
 //    } else {
 //        res.render('profile', {user})
 //    }
-console.log(req.user);
 })
+
 
 module.exports = router;

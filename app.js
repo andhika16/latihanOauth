@@ -18,7 +18,7 @@ connectDB()
 // load passport
 require('./config/passport')(passport);
 // load passport-facebook
-require('./config/passport-facebook')(passport);
+// require('./config/passport-facebook')(passport);
 // session
 app.use(session({
     secret: 'secret',
@@ -48,9 +48,9 @@ app.set('view engine', '.hbs');
 app.use(express.static(path.join(__dirname, 'public')))
 
 // route
+app.use('/auth', require('./routes/facebook-auth'))
 app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/google-auth'))
-app.use('/auth', require('./routes/facebook-auth'))
 
 // port
 app.listen(PORT, (req, res) => {
