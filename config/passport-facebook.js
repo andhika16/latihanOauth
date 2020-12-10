@@ -1,21 +1,33 @@
-// const FacebookStrategy = require('passport-facebook').Strategy;
-// const UserFacebook = require('../model/facebook-user');
-// module.exports = function (passport) {
+const fetch = require('node-fetch');
 
-//   passport.use(new FacebookStrategy({
-//     clientID: process.env.CLIENT_ID_GIT,
-//     clientSecret: process.env.CLIENT_SECRET_GIT,
-//     callbackURL: "http://localhost:3000/auth/github/redirect"
-//     // profileFields: ['email','id', 'first_name', 'gender', 'last_name', 'picture']
-//   },
-//     async function (accessToken, refreshToken, profile, done) {
-      
-//      console.log(profile);
+module.exports = {
+    githubUser: async function (access_token) {
+        const req =  await fetch('https://api.github.com/user', {
+            headers : {
+              Authorization : `bearer ${access_token}`
+            }
+          })
+       
+          const data = await req.json()
+          return data;
+    },
+    getAccessToken: async function ({code,client_id,client_secret}){
+    const res = await fetch('https://github.com/login/oauth/access_token', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      client_id,
+      client_secret,
+      code,
+    }),
+  })
+  const text = await res.text()
+  const params = new URLSearchParams(text);
+  return params.get("access_token");
+    }
+
+}
 
 
-
-//     }
-//   ));
-//   // passport.serializeUser((user, done) => {done(null,user.id)})
-//   // passport.deserializeUser( (id, done) => User.findById(id,(err, user) => done(err,user)))
-// }
