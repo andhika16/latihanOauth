@@ -23,10 +23,7 @@ require('./config/passport')(passport);
 app.use(session({
     secret: 'secret',
     resave: false,
-    saveUninitialized: false,
-    store: new MongoStore({
-        mongooseConnection: mongoose.connection
-    })
+    saveUninitialized: false
 }))
 // passport initialize
 app.use(passport.initialize())
