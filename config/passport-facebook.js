@@ -9,7 +9,6 @@ module.exports = function(passport) {
         callbackURL: "http://localhost:3000/auth/facebook/redirect",
         profileFields: ['id', 'first_name', 'last_name']
     }, async (accessToken, refreshToken, profile, done) => {
-       console.log(profile.id);
         const newUser = {
             facebookId: profile.id,
             displayName: profile.displayName,
@@ -22,11 +21,10 @@ module.exports = function(passport) {
             // console.log(profile.id);
 
             if(user){
-                // console.log(user);
-                return done(null,user)
+                 done(null,user)
             } else {
                 user = await UserFacebook.create(newUser)
-                return done(null,user)
+                 done(null,user)
             }
 
         } catch (error) {

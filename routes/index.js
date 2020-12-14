@@ -31,7 +31,7 @@ router.get('/profile', (req, res) => {
 //    } else {
 //        res.render('profile', {user})
 //    }
-console.log(req.user);
+console.log(req.query);
 })
 
 module.exports = router;
