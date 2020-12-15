@@ -13,11 +13,11 @@
                     <a class="nav-link" href="/about"><i class="fas fa-folder-open"></i> About</a>
                 </li>
             </ul>
-            {{#if user}}
+            {{#if firstName}}
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/profile"><img src="{{user.image}}" alt="" width="30px"> <span>Hai</span>
-                        {{user.firstName}}</a>
+                    <a class="nav-link" href="#"><img src="{{image}}" alt="" width="30px"> <span>Hai</span>
+                        {{firstName}}</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -26,8 +26,8 @@
                         Logout</a>
                 </li>
             </ul>
-
             {{else}}
+
             <ul class="navbar-nav ml-auto">
                 <li>
                     <a class="btn btn-primary btn-md" href="/login"><i class="fas fa-sign-in-alt"></i>
@@ -35,7 +35,6 @@
                 </li>
             </ul>
             {{/if}}
-
 
         </div>
     </div>
