@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const UserFacebokSchema = new mongoose.Schema({
+const UserGithubSchema = new mongoose.Schema({
     githubId:{type:String,required:true},
     displayName:{type:String,required:true},
     firstName: {type:String,required:true},
@@ -11,4 +11,4 @@ const UserFacebokSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('facebook-oauth', UserFacebokSchema)
+module.exports = mongoose.model('github-oauth', UserGithubSchema)

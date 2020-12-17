@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
-const keys = require('./keys');
 const connectDB =  async () => {
 
     try {
-        await mongoose.connect(keys.mongodbId.dbURI,{
+        await mongoose.connect(process.env.dbURI,{
             useNewUrlParser:true, 
             useUnifiedTopology:true
         } , () => {

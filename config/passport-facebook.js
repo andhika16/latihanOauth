@@ -7,8 +7,9 @@ module.exports = function(passport) {
         clientID: process.env.CLIENT_ID_FB,
         clientSecret:process.env.CLIENT_SECRET_FB,
         callbackURL: "http://localhost:3000/auth/facebook/redirect",
-        profileFields: ['id', 'first_name', 'last_name']
+        profileFields: ['id', 'first_name', 'last_name','email']
     }, async (accessToken, refreshToken, profile, done) => {
+        console.log(profile);
         const newUser = {
             facebookId: profile.id,
             displayName: profile.displayName,

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const User = require('../model/facebook-user');
+const User = require('../model/github');
 
 
 // login page
@@ -18,28 +18,24 @@ router.get('/about', (req, res) => {
 })
 
 // about page
-router.get('/profile' ,async (req, res) => {
+router.get('/profile' , (req, res) => {
     
-    const user = await User.findOne({
-// bagaimana cara agar session tidak tambah didatabase dan access_token tetap
-        githubId:req.session.githubId
-    })
-// user github ambil data dari database untuk user google ambil data req.user 
-// kondisi dibawah sebagai pemisah antara user github dan google
-    if(user) {
-        res.render('profile', {
-            displayName:user.displayName,
-            firstName:user.firstName,
-            image:user.image
-        })
-    } else {
-        res.render('profile',{
-            // terjadi error pada saat login user github pada render req.user
-            displayName:req.user.displayName,
-            firstName:req.user.firstName,
-            image:req.user.image
-        })
-    }
+        if(req.session.githubId) {
+            res.render('profile',{
+                displayName:req.session.displayName,
+                firstName:req.session.firstName,
+                image:req.session.image
+            })
+    
+        } else {
+            res.render('profile',{
+                // terjadi error pada saat login user github pada render req.user
+                displayName:req.user.displayName,
+                firstName:req.user.firstName,
+                image:req.user.image
+            })
+        }
+
 
    
 })
