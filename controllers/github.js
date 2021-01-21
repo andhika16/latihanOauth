@@ -1,5 +1,5 @@
 // setup github user and access token
-const { githubUser,getAccessToken } = require('../config/githubAuth');
+const { githubUser,getAccessToken } = require('../middlewares/githubAuth');
 const User = require('../model/github');
 const client_id = process.env.CLIENT_ID_GIT;
 const client_secret = process.env.CLIENT_SECRET_GIT;

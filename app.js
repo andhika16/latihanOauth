@@ -6,19 +6,19 @@ const path = require('path');
 const passport = require('passport');
 const connectDB = require('./config/db');
 const session = require('express-session');
-const mongoose = require('mongoose');
-const MongoStore = require('connect-mongo')(session);
+
 const dotenv = require('dotenv');
-// load config
-dotenv.config({
-    path:'./config/config.env'
-})
 // load db
 connectDB()
 // load passport
-require('./config/passport')(passport);
+require('./middlewares/passport')(passport);
 // load passport-facebook
-require('./config/passport-facebook')(passport);
+require('./middlewares/passport-facebook')(passport);
+
+// MIDDLEWARE ------------------
+
+// load config
+dotenv.config({path:'./config/config.env'})
 // session
 app.use(session({
     secret: 'secret',
@@ -29,21 +29,15 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 // body parser
-app.use(express.urlencoded({
-    extended: false
-}))
+app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 // load view handlebars
 app.set('view engine', 'ejs' )
-app.engine('.hbs', exphbs({ 
-    defaultLayout: 'main',
-    extname: '.hbs'
-}));
+app.engine('.hbs', exphbs({ defaultLayout: 'main',extname: '.hbs'}));
 app.set('view engine', '.hbs');
-
 // static folder
 app.use(express.static(path.join(__dirname, 'public')))
-
+// -------------------------------
 // route
 app.use('/auth', require('./routes/facebook-auth'))
 app.use('/auth', require('./routes/github-auth'))
