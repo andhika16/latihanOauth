@@ -6,19 +6,21 @@ const path = require('path');
 const passport = require('passport');
 const connectDB = require('./config/db');
 const session = require('express-session');
-
+const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
+
+
+// *MIDDLEWARE ------------------
+
+// load config
+dotenv.config({path:'./config/config.env'})
+
 // load db
 connectDB()
 // load passport
 require('./middlewares/passport')(passport);
 // load passport-facebook
 require('./middlewares/passport-facebook')(passport);
-
-// MIDDLEWARE ------------------
-
-// load config
-dotenv.config({path:'./config/config.env'})
 // session
 app.use(session({
     secret: 'secret',
@@ -29,6 +31,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 // body parser
+app.use(cookieParser())
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 // load view handlebars
@@ -37,7 +40,7 @@ app.engine('.hbs', exphbs({ defaultLayout: 'main',extname: '.hbs'}));
 app.set('view engine', '.hbs');
 // static folder
 app.use(express.static(path.join(__dirname, 'public')))
-// -------------------------------
+// *-------------------------------
 // route
 app.use('/auth', require('./routes/facebook-auth'))
 app.use('/auth', require('./routes/github-auth'))
